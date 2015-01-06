@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 名称一样时NameSpace可以不用配置 -->
+<mapper namespace="com.lbs.mapper.StuMapper">
+
+	<!-- 使用EhCache开启MyBatis的二级缓存, 并使用日志记录, 否则直接使用EhcacheCache即可-->
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" readOnly="true"/>
+
+	<!-- StuResultMap配置 -->
+	<resultMap type="com.lbs.model.Stu" id="stuModel">
+		<id property="stuId" column="stuid" jdbcType="VARCHAR" />
+		<result property="stuName" column="stuname" jdbcType="VARCHAR" />
+		<result property="sturAge" column="styage" jdbcType="INTEGER"/>
+	</resultMap>
+
+	<!-- 根据UserID查询学生信息 -->
+	<select id="findByStuId" resultMap="stuModel" parameterType="String">
+		select * from stu where stuid=#{stuId}
+	</select>
+
+</mapper>
+  
+  
